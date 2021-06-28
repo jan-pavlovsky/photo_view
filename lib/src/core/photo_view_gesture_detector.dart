@@ -98,7 +98,7 @@ class PhotoViewGestureRecognizer extends ScaleGestureRecognizer {
   bool ready = true;
 
   @override
-  void addAllowedPointer(PointerEvent event) {
+  void addAllowedPointer(PointerDownEvent event) {
     if (ready) {
       ready = false;
       _pointerLocations = <int, Offset>{};
@@ -113,7 +113,7 @@ class PhotoViewGestureRecognizer extends ScaleGestureRecognizer {
   }
 
   @override
-  void handleEvent(PointerEvent event) {
+  void handleEvent(PointerDownEvent event) {
     if (validateAxis != null) {
       _computeEvent(event);
       _updateDistances();
@@ -122,7 +122,7 @@ class PhotoViewGestureRecognizer extends ScaleGestureRecognizer {
     super.handleEvent(event);
   }
 
-  void _computeEvent(PointerEvent event) {
+  void _computeEvent(PointerDownEvent event) {
     if (event is PointerMoveEvent) {
       if (!event.synthesized) {
         _pointerLocations[event.pointer] = event.position;
@@ -145,7 +145,7 @@ class PhotoViewGestureRecognizer extends ScaleGestureRecognizer {
         count > 0 ? focalPoint / count.toDouble() : Offset.zero;
   }
 
-  void _decideIfWeAcceptEvent(PointerEvent event) {
+  void _decideIfWeAcceptEvent(PointerDownEvent event) {
     if (!(event is PointerMoveEvent)) {
       return;
     }
